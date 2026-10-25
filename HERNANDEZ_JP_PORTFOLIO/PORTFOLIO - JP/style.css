@@ -1,0 +1,698 @@
+/* ==========================================================================
+   Base & Typography
+   ========================================================================== */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #060507;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #060507;
+}
+::-webkit-scrollbar-thumb {
+  background: #23161c;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e11d48;
+}
+
+/* ==========================================================================
+   Luxury Crimson Ambient Atmosphere
+   ========================================================================== */
+.bg-crimson-radial {
+  background: 
+    radial-gradient(circle at 80% 20%, rgba(225, 29, 72, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 20% 80%, rgba(190, 18, 60, 0.08) 0%, transparent 40%),
+    linear-gradient(180deg, #070608 0%, #0c080b 50%, #060507 100%);
+}
+
+.profile-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(225, 29, 72, 0.22) 0%, rgba(225, 29, 72, 0.05) 45%, transparent 70%);
+  filter: blur(40px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Pro Dynamic Spotlight Card Physics
+   ========================================================================== */
+.spotlight-card {
+  position: relative;
+  background: rgba(16, 12, 15, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.spotlight-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(244, 63, 94, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(225, 29, 72, 0.2);
+}
+
+/* Cursor-Following Gradient Spotlight */
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: var(--mouse-y, -100px);
+  left: var(--mouse-x, -100px);
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(225, 29, 72, 0.15) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* Glowing Primary Button */
+.btn-glow-crimson {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+  box-shadow: 0 0 25px rgba(225, 29, 72, 0.4);
+  transition: all 0.25s ease;
+}
+
+.btn-glow-crimson:hover {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  box-shadow: 0 0 35px rgba(225, 29, 72, 0.6);
+  transform: scale(1.02);
+}
+
+/* Custom Scroll Progress Bar */
+#progressBar {
+  transition: width 0.1s ease-out;
+}
+/* Layout Safety Rules to Prevent Squishing and Overlapping */
+.profile-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  min-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-photo-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  min-height: 380px;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: #141018;
+}
+
+.hero-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.hero-metric-card {
+  padding: 1.125rem 1.25rem;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.875rem;
+}
+#profileModal {
+  display: none !important;
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 999999 !important;
+  background-color: rgba(5, 4, 7, 0.94) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 1rem !important;
+}
+
+#profileModal.active,
+#profileModal.show {
+  display: flex !important;
+}
+
+
+.certificate-showcase {
+  max-width: 850px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+
+/* Professional Certificate Showcase */
+.certificate-slider {
+  position: relative;
+  width: 100%;
+  height: clamp(260px, 48vw, 520px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0c090e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  isolation: isolate;
+}
+
+#certificateSlide {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 14px;
+
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.7s ease;
+
+  will-change: opacity, transform, filter;
+}
+
+/* Exit animation */
+#certificateSlide.fade-out {
+  opacity: 0;
+  transform: scale(0.97);
+  filter: blur(3px);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .certificate-slider {
+    height: 280px;
+    border-radius: 12px;
+  }
+
+  #certificateSlide {
+    padding: 8px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  #certificateSlide {
+    transition: opacity 0.2s ease;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* =========================================
+   SEAMLESS INFINITE CERTIFICATE BANNER
+========================================= */
+
+.cert-banner {
+  --cert-gap: 24px;
+  --cert-width: 320px;
+
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+  background: #060507;
+}
+
+.cert-track {
+  display: flex;
+  align-items: center;
+  gap: var(--cert-gap);
+  width: max-content;
+  animation: cert-scroll 35s linear infinite;
+  will-change: transform;
+}
+
+.cert-item {
+  flex: 0 0 var(--cert-width);
+  height: 220px;
+  overflow: hidden;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #120d15;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.cert-item:hover {
+  border-color: rgba(251, 113, 133, 0.7);
+}
+
+.cert-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Move one duplicated set to the left */
+@keyframes cert-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+
+/* =========================================
+   PROFESSIONAL CERTIFICATES SECTION
+========================================= */
+
+.certificates-section {
+  padding: 90px 0;
+  background: #08070a;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  color: #fff;
+}
+
+.certificates-container {
+  width: min(1180px, 92%);
+  margin: 0 auto;
+}
+
+.certificates-heading {
+  margin-bottom: 26px;
+}
+
+.certificates-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 12px;
+  color: #fb7185;
+  font: 700 11px/1.5 monospace;
+  letter-spacing: .16em;
+}
+
+.heading-dot,
+.category-indicator {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border-radius: 50%;
+  background: #fb7185;
+  box-shadow: 0 0 12px rgba(251,113,133,.6);
+}
+
+.certificates-heading h2 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+
+.certificates-heading p {
+  max-width: 650px;
+  margin-top: 12px;
+  color: #a3a3a3;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* Dynamic category banner */
+
+.cert-category-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  margin: 22px 0 12px;
+  color: #fb7185;
+  font: 800 13px/1.5 monospace;
+  letter-spacing: .14em;
+  text-align: center;
+}
+
+#certCategoryLabel {
+  display: inline-block;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+#certCategoryLabel.is-changing {
+  opacity: 0;
+  transform: translateY(5px);
+}
+
+/* Continuous horizontal slider */
+
+.cert-banner {
+  --cert-gap: 20px;
+  --cert-width: 290px;
+
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 12px 0 28px;
+  background: transparent;
+  -webkit-mask-image: linear-gradient(
+    to right, transparent, #000 3%, #000 97%, transparent
+  );
+  mask-image: linear-gradient(
+    to right, transparent, #000 3%, #000 97%, transparent
+  );
+}
+
+.cert-track {
+  display: flex;
+  align-items: center;
+  gap: var(--cert-gap);
+  width: max-content;
+  animation: cert-scroll 42s linear infinite;
+  will-change: transform;
+}
+
+.cert-banner:hover .cert-track {
+  animation-play-state: paused;
+}
+
+.cert-item {
+  flex: 0 0 var(--cert-width);
+  height: 195px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 15px;
+  background: linear-gradient(145deg, #17131c, #0d0b10);
+  transition: border-color .25s ease, transform .25s ease;
+}
+
+.cert-item:hover {
+  border-color: rgba(251,113,133,.65);
+  transform: translateY(-3px);
+}
+
+.cert-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@keyframes cert-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Category filters */
+
+.cert-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 12px 0 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.cert-filter {
+  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 10px;
+  background: #121015;
+  color: #a3a3a3;
+  font-size: 12px;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+  cursor: pointer;
+}
+
+.cert-filter:hover,
+.cert-filter.active {
+  border-color: rgba(251,113,133,.35);
+  background: rgba(251,113,133,.12);
+  color: #fda4af;
+}
+
+/* Organized certificate gallery */
+
+.cert-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.cert-gallery-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 15px;
+  background: #100e13;
+  transition: transform .25s ease, border-color .25s ease;
+}
+
+.cert-gallery-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(251,113,133,.45);
+}
+
+.cert-gallery-card[hidden] {
+  display: none !important;
+}
+
+.cert-gallery-card > img {
+  display: block;
+  width: 100%;
+  height: 210px;
+  padding: 12px;
+  box-sizing: border-box;
+  object-fit: contain;
+  background: #0b090e;
+  cursor: zoom-in;
+}
+
+.cert-card-info {
+  padding: 17px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.cert-card-info span {
+  color: #fb7185;
+  font: 700 10px/1.5 monospace;
+  letter-spacing: .1em;
+}
+
+.cert-card-info h3 {
+  margin: 7px 0 0;
+  color: #f5f5f5;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.cert-gallery-count {
+  margin-top: 20px;
+  color: #737373;
+  font: 12px monospace;
+  text-align: right;
+}
+
+/* Responsive layouts */
+
+@media (max-width: 850px) {
+  .cert-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .certificates-section {
+    padding: 65px 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .cert-banner {
+    --cert-width: 245px;
+    --cert-gap: 14px;
+  }
+
+  .cert-item {
+    height: 165px;
+  }
+
+  .cert-gallery {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cert-gallery-card > img {
+    height: 220px;
+  }
+
+  .cert-category-banner {
+    font-size: 11px;
+    letter-spacing: .08em;
+  }
+
+  .cert-filter {
+    padding: 9px 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-track {
+    animation-duration: 120s;
+  }
+
+  #certCategoryLabel,
+  .cert-gallery-card,
+  .cert-item {
+    transition: none;
+  }
+}
+
+/* Full-screen certificate image viewer */
+.cert-image-viewer {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: rgba(0, 0, 0, .94);
+}
+
+.cert-image-viewer.open {
+  display: flex;
+}
+
+.cert-image-viewer img {
+  display: block;
+  max-width: min(100%, 1100px);
+  max-height: 88vh;
+  object-fit: contain;
+}
+
+.cert-viewer-close {
+  position: absolute;
+  top: 18px;
+  right: 25px;
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 42px;
+  cursor: pointer;
+}
+/* Hide certificate gallery until a filter is selected */
+#certGallery[hidden] {
+  display: none !important;
+}
+
+/* Display gallery after clicking a category */
+#certGallery:not([hidden]) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+@media (max-width: 850px) {
+  #certGallery:not([hidden]) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  #certGallery:not([hidden]) {
+    grid-template-columns: 1fr;
+  }
+}
+/* Hide the certificate gallery until a category is selected */
+#certGridContainer.is-hidden {
+  display: none !important;
+}
+
+/* Resume card — matches the existing red/black portfolio theme */
+.resume-card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 24px;
+    border: 1px solid rgba(255, 48, 48, 0.30);
+    border-radius: 18px;
+    background: linear-gradient(145deg, #120b0e, #0b0b0e);
+    color: #fff;
+}
+
+.resume-card h3 {
+    margin: 0 0 10px;
+    color: #ff4545;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.resume-card p {
+    margin: 0 0 18px;
+    color: #d1d1d1;
+    line-height: 1.7;
+}
+
+.resume-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 18px;
+    border: 1px solid #ff3030;
+    border-radius: 8px;
+    background: #160d10;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+
+.resume-link:hover {
+    background: #ff3030;
+    box-shadow: 0 0 15px rgba(255, 48, 48, .45);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .resume-card {
+        padding: 20px;
+    }
+}
